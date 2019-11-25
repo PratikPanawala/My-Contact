@@ -1,5 +1,6 @@
 package com.example.contactbook.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -10,7 +11,7 @@ import com.example.contactbook.adapter.ContactAdapter
 import com.example.contactbook.viewModel.ContactViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ContactAdapter.ContactClickListener {
 
     private lateinit var contactViewModel: ContactViewModel
 
@@ -18,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val contactAdapter = ContactAdapter(this)
+        val contactAdapter = ContactAdapter(this, this)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = contactAdapter
 
@@ -34,5 +35,11 @@ class MainActivity : AppCompatActivity() {
         })
         contactViewModel.getContact()
 
+    }
+
+    override fun onContactClick(id: Int) {
+        val intent = Intent(this@MainActivity, DetailContactActivity::class.java)
+        intent.putExtra("id", id)
+        startActivity(intent)
     }
 }

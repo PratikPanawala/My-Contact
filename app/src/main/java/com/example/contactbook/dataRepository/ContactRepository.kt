@@ -6,6 +6,8 @@ import com.example.contactbook.callbacks.ResultCallback
 import com.example.contactbook.data.local.ContactDao
 import com.example.contactbook.data.model.Contact
 import com.example.contactbook.data.remote.ApiService
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,6 +25,19 @@ class ContactRepository(private val contactDao: ContactDao, private val apiServi
 
     suspend fun insert(contact: Contact) {
         contactDao.insert(contact)
+    }
+
+    suspend fun update(contact: Contact) {
+        contactDao.update(contact)
+    }
+
+    /**
+     * The implementation of getContact() in the database is completely hidden from the UI.
+     * Room ensures that you're not doing any long running operations on the mainthread, blocking
+     * the UI, so we need to handle changing Dispatchers to Dispatchers.IO
+     */
+    suspend fun getContact(id: Int): Contact = withContext(Dispatchers.IO) {
+        return@withContext contactDao.getContactById(id)
     }
 
     suspend fun insert(contacts: List<Contact>) {
