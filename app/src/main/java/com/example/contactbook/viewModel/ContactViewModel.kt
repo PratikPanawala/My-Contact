@@ -14,8 +14,8 @@ import kotlinx.coroutines.launch
 
 
 /**
- * View Model to keep a reference to the word repository and
- * an up-to-date list of all words.
+ * View Model to keep a reference to the Contact repository and
+ * an up-to-date list of all contacts.
  */
 class ContactViewModel(application: Application) : AndroidViewModel(application) {
 
