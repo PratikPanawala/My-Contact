@@ -1,8 +1,8 @@
 package com.example.contactbook.data.model
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity(tableName = "contact_table")
 data class Contact(
@@ -10,11 +10,12 @@ data class Contact(
     val email: String,
     val favorite: Boolean,
     val first_name: String,
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    val id: Int,
     val last_name: String,
     val phone_number: String,
     val profile_pic: String,
     val updated_at: String
-)
+):Serializable {
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0
+
+}

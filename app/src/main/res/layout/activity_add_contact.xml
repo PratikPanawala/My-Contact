@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="contactAddViewModel"
+            type="com.example.contactbook.viewModel.ContactAddViewModel" />
+    </data>
+
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".activity.AddContactActivity">
+
+        <EditText
+            android:id="@+id/edit_first_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/big_padding"
+            android:layout_marginBottom="@dimen/big_padding"
+            android:fontFamily="sans-serif-light"
+            android:hint="@string/hint_first_name"
+            android:inputType="textPersonName"
+            android:padding="@dimen/small_padding"
+            android:text="@={contactAddViewModel.mFirstName}"
+            android:textSize="18sp"
+            app:error="@{contactAddViewModel.firstNameError}" />
+
+        <EditText
+            android:id="@+id/edit_last_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/big_padding"
+            android:layout_marginBottom="@dimen/big_padding"
+            android:fontFamily="sans-serif-light"
+            android:hint="@string/hint_last_name"
+            android:inputType="textPersonName"
+            android:padding="@dimen/small_padding"
+            android:text="@={contactAddViewModel.mLastName}"
+            android:textSize="18sp"
+            app:error="@{contactAddViewModel.lastNameError}" />
+
+        <EditText
+            android:id="@+id/edit_mobile_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/big_padding"
+            android:layout_marginBottom="@dimen/big_padding"
+            android:fontFamily="sans-serif-light"
+            android:hint="@string/hint_mobile_number"
+            android:inputType="phone"
+            android:padding="@dimen/small_padding"
+            android:text="@={contactAddViewModel.mPhone}"
+            android:textSize="18sp"
+            app:error="@{contactAddViewModel.phoneError}" />
+
+        <EditText
+            android:id="@+id/edit_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/big_padding"
+            android:layout_marginBottom="@dimen/big_padding"
+            android:fontFamily="sans-serif-light"
+            android:hint="@string/hint_email"
+            android:inputType="textEmailAddress"
+            android:padding="@dimen/small_padding"
+            android:text="@={contactAddViewModel.mEmail}"
+            android:textSize="18sp"
+            app:error="@{contactAddViewModel.emailError}" />
+
+        <Button
+            android:id="@+id/button_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="@color/colorPrimary"
+            android:onClick="@{() -> contactAddViewModel.onSaveClicked()}"
+            android:text="@string/button_save" />
+    </LinearLayout>
+</layout>
