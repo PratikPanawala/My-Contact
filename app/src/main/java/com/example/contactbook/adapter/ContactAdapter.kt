@@ -10,10 +10,15 @@ import com.example.contactbook.R
 import com.example.contactbook.data.model.Contact
 
 
-class ContactAdapter(context: Context) :
+class ContactAdapter(context: Context, private val contactClickListener: ContactClickListener) :
     RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
     private var contactList = emptyList<Contact>()
     private val v: LayoutInflater = LayoutInflater.from(context)
+
+    interface ContactClickListener {
+        fun onContactClick(id: Int)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(v.inflate(R.layout.each_contact, parent, false))
     }
@@ -26,6 +31,11 @@ class ContactAdapter(context: Context) :
         val contact = contactList[position]
         holder.name.text = contact.first_name
 
+        holder.itemView.setOnClickListener {
+            contactClickListener.onContactClick(
+                contact.id
+            )
+        }
     }
 
     inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
